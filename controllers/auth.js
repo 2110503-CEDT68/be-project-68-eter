@@ -31,7 +31,10 @@ exports.register = async (req, res, next) => {
 
         const { name, telephone, email, password, role } = req.body;
         const user = await User.create({ name, telephone, email, password, role });
-        sendTokenResponse(user, 200, res);
+        res.status(201).json({
+            success: true,
+            message: "Registration successful. Please log in."
+        });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
